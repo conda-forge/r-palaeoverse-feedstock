@@ -1,4 +1,4 @@
-{% set version = "1.4.0" %}
+{% set version = "1.5.0" %}
 {% set posix = "m2-" if win else "" %}
 
 package:
@@ -9,7 +9,7 @@ source:
   url:
     - {{ cran_mirror }}/src/contrib/palaeoverse_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/palaeoverse/palaeoverse_{{ version }}.tar.gz
-  sha256: efe8ac4ca8ff8ad992a2e7fa6e5ee422d3a0814b8c8e08be7dda124131c54dc4
+  sha256: 950c2f7c4cd0d2bc4c4a926369183f74a6123e476dde4f82cd9ffee483950989
 
 build:
   number: 0
