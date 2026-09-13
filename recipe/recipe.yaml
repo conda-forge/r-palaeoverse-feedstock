@@ -1,31 +1,24 @@
-{% set version = "1.5.0" %}
-{% set posix = "m2-" if win else "" %}
+schema_version: 1
+
+context:
+  version: "1.5.0"
 
 package:
   name: r-palaeoverse
-  version: {{ version|replace("-", "_") }}
+  version: ${{ version }}
 
 source:
   url:
-    - {{ cran_mirror }}/src/contrib/palaeoverse_{{ version }}.tar.gz
-    - {{ cran_mirror }}/src/contrib/Archive/palaeoverse/palaeoverse_{{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/palaeoverse_${{ version }}.tar.gz
+    - ${{ cran_mirror }}/src/contrib/Archive/palaeoverse/palaeoverse_${{ version }}.tar.gz
   sha256: 950c2f7c4cd0d2bc4c4a926369183f74a6123e476dde4f82cd9ffee483950989
 
 build:
-  number: 0
+  number: 1
   noarch: generic
-  rpaths:
-    - lib/R/lib/
-    - lib/
-  missing_dso_whitelist:
-    - "*/R.dll"        # [win]
-    - "*/Rblas.dll"    # [win]
-    - "*/Rlapack.dll"  # [win]
+  script: ${{ R }} CMD INSTALL --build .
 
 requirements:
-  build:
-    - {{ posix }}zip               # [win]
-    - cross-r-base {{ r_base }}    # [build_platform != target_platform]
   host:
     - r-base
     - r-ape
@@ -49,19 +42,20 @@ requirements:
     - r-sf
     - r-stringdist
 
-test:
-  requires:
-    - r-testthat
-  source_files:
-    - tests/
-  commands:
-    - $R -e "library('palaeoverse')"  # [not win]
-    - $R -e "testthat::test_file('tests/testthat.R', stop_on_failure=TRUE)"  # [not win]
-    - "\"%R%\" -e \"library('palaeoverse')\""  # [win]
-    - "\"%R%\" -e \"testthat::test_file('tests/testthat.R', stop_on_failure=TRUE)\""  # [win]
+tests:
+  - r:
+      libraries:
+        - palaeoverse
+  - files:
+      source:
+        - tests/
+    requirements:
+      run:
+        - r-testthat
+    script:
+      - R -e "testthat::test_file('tests/testthat.R', stop_on_failure=TRUE)"
 
 about:
-  home: https://palaeoverse.palaeoverse.org, https://palaeoverse.org
   license: GPL-3.0-or-later
   summary: R package developed by palaeobiologists, for palaeobiologists
   description: |
@@ -72,11 +66,11 @@ about:
     space), exploration, summarisation and visualisation. Reference datasets (i.e. Geological
     Time Scales <https://stratigraphy.org/chart>) and auxiliary functions are also provided.
     Details can be found in: Jones et al., (2023) <doi: 10.1111/2041-210X.14099>.
-  license_family: GPL3
   license_file:
-    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'
-  dev_url: https://github.com/palaeoverse/palaeoverse
-  doc_url: https://palaeoverse.palaeoverse.org/
+    - ${{ PREFIX }}/lib/R/share/licenses/GPL-3
+  homepage: https://palaeoverse.palaeoverse.org
+  repository: https://github.com/palaeoverse/palaeoverse
+  documentation: https://palaeoverse.palaeoverse.org/
 
 extra:
   recipe-maintainers:
