@@ -3,7 +3,7 @@ About r-palaeoverse-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/r-palaeoverse-feedstock/blob/main/LICENSE.txt)
 
-Home: https://palaeoverse.palaeoverse.org, https://palaeoverse.org
+Home: https://palaeoverse.palaeoverse.org/
 
 Package license: GPL-3.0-or-later
 
@@ -20,7 +20,6 @@ The package currently includes functionality for data cleaning, binning (time an
 space), exploration, summarisation and visualisation. Reference datasets (i.e. Geological
 Time Scales <https://stratigraphy.org/chart>) and auxiliary functions are also provided.
 Details can be found in: Jones et al., (2023) <doi: 10.1111/2041-210X.14099>.
-
 
 Current build status
 ====================
@@ -53,31 +52,73 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `r-palaeoverse` can be installed with `conda`:
+How to use
+----------
+
+<details>
+<summary>With conda</summary>
 
 ```
 conda install r-palaeoverse
 ```
 
-or with `mamba`:
+</details>
+
+<details>
+<summary>With mamba</summary>
 
 ```
 mamba install r-palaeoverse
 ```
 
-It is possible to list all of the versions of `r-palaeoverse` available on your platform with `conda`:
+</details>
+
+<details>
+<summary>With pixi</summary>
+
+```
+# for adding to your local project
+pixi add r-palaeoverse
+# for installing globally
+pixi global install r-palaeoverse
+```
+
+</details>
+
+Search package versions
+-----------------------
+
+It is possible to list all of the versions of `r-palaeoverse` available on your platform:
+
+<details>
+<summary>With conda</summary>
 
 ```
 conda search r-palaeoverse --channel conda-forge
 ```
 
-or with `mamba`:
+</details>
+
+<details>
+<summary>With mamba</summary>
 
 ```
 mamba search r-palaeoverse --channel conda-forge
 ```
 
-Alternatively, `mamba repoquery` may provide more information:
+</details>
+
+<details>
+<summary>With pixi</summary>
+
+```
+pixi search r-palaeoverse --channel conda-forge
+```
+
+</details>
+
+<details>
+<summary>With mamba repoquery, which may provide more information</summary>
 
 ```
 # Search all versions available on your platform:
@@ -89,6 +130,8 @@ mamba repoquery whoneeds r-palaeoverse --channel conda-forge
 # List dependencies of `r-palaeoverse`:
 mamba repoquery depends r-palaeoverse --channel conda-forge
 ```
+
+</details>
 
 
 About conda-forge
@@ -157,6 +200,7 @@ In order to produce a uniquely identifiable distribution:
 Feedstock Maintainers
 =====================
 
+* [@LewisAJones](https://github.com/LewisAJones/)
 * [@conda-forge/r](https://github.com/orgs/conda-forge/teams/r/)
 * [@willgearty](https://github.com/willgearty/)
 
